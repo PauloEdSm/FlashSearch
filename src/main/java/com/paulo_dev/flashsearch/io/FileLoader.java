@@ -1,15 +1,20 @@
 package io;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+
 public class FileLoader {
-	String path;
-	String content;
+	private static String path;
+	private String content;
 
 	/**
 	 * Gets the text current.
 	 * @return the current text as a String.
 	 */
-		public FileLoader(String path) {
+		public FileLoader(String path) throws IOException {
 		super();
 		this.path = path;
 		this.content = load();
@@ -31,10 +36,20 @@ public class FileLoader {
 	 * Gets the text current.
 	 * @return the current text as a String.
 	 */
-	public static String load(){
-	return "";
-		
+
+	public static String load() throws IOException {
+
+            StringBuilder builder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))){
+
+				char[] buffer = new char[4096];
+				int charsRead;
+
+				while ((charsRead = reader.read(buffer)) != -1) {
+					builder.append(buffer,0,charsRead);
+				}
+
+        }
+	return builder.toString();
 	}
-		
-		
 }
