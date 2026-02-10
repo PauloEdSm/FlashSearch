@@ -1,17 +1,27 @@
 package model;
 
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
+
+import io.FileLoader;
+
 public class Document{
     private String filePath;
     private String fileName;
     private long fileSize;
+    private FileLoader loader;
+    private String fileContentString;
 
-    //constructing method
-    public Document(String filePath, long fileSize, String fileName) {
+    public Document (String filePath) throws IOException {
         this.filePath = filePath;
-        this.fileSize = fileSize;
-        this.fileName = fileName;
+        this.loader = new FileLoader(filePath);
+        this.fileName = "";
+        this.fileSize =2;
+        this.fileContentString = this.loader.getContent();
+        
     }
-    //Getter`s and Setter`s methods
+
     public String getFilePath() {
         return filePath;
     }
@@ -35,4 +45,9 @@ public class Document{
     public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
+
+    public String getFileContentString() {
+        return fileContentString;
+    }
+
 }
