@@ -4,16 +4,11 @@ package io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 
 public class FileLoader {
-	private static String path;
+	private String path;
 	private String content;
 
-	/**
-	 * Gets the text current.
-	 * @return the current text as a String.
-	 */
 		public FileLoader(String path) throws IOException {
 		super();
 		this.path = path;
@@ -37,10 +32,10 @@ public class FileLoader {
 	 * @return the current text as a String.
 	 */
 
-	public static String load() throws IOException {
+	public String load() throws IOException {
 
             StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.path))){
 
 				char[] buffer = new char[4096];
 				int charsRead;
